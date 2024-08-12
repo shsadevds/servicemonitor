@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- servicemonitor_v1_servicemonitor.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples
