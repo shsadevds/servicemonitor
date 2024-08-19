@@ -108,10 +108,10 @@ PLATFORMS ?= linux/arm64,linux/amd64,linux/s390x,linux/ppc64le
 docker-buildx: ## Build and push docker image for the manager for cross-platform support
 	# copy existing Dockerfile and insert --platform=${BUILDPLATFORM} into Dockerfile.cross, and preserve the original Dockerfile
 	sed -e '1 s/\(^FROM\)/FROM --platform=\$$\{BUILDPLATFORM\}/; t' -e ' 1,// s//FROM --platform=\$$\{BUILDPLATFORM\}/' Dockerfile > Dockerfile.cross
-	- $(CONTAINER_TOOL) buildx create --name servicemonitor-builder
-	$(CONTAINER_TOOL) buildx use servicemonitor-builder
+	- $(CONTAINER_TOOL) buildx create --name testcrd-builder
+	$(CONTAINER_TOOL) buildx use testcrd-builder
 	- $(CONTAINER_TOOL) buildx build --push --platform=$(PLATFORMS) --tag ${IMG} -f Dockerfile.cross .
-	- $(CONTAINER_TOOL) buildx rm servicemonitor-builder
+	- $(CONTAINER_TOOL) buildx rm testcrd-builder
 	rm Dockerfile.cross
 
 .PHONY: build-installer

@@ -35,8 +35,8 @@ import (
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
-	servicemonitorv1 "servicemonitor/api/v1"
-	"servicemonitor/internal/controller"
+	devopsv1 "testCrd/api/v1"
+	"testCrd/internal/controller"
 	// +kubebuilder:scaffold:imports
 )
 
@@ -48,7 +48,7 @@ var (
 func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
-	utilruntime.Must(servicemonitorv1.AddToScheme(scheme))
+	utilruntime.Must(devopsv1.AddToScheme(scheme))
 	// +kubebuilder:scaffold:scheme
 }
 
@@ -126,7 +126,7 @@ func main() {
 		WebhookServer:          webhookServer,
 		HealthProbeBindAddress: probeAddr,
 		LeaderElection:         enableLeaderElection,
-		LeaderElectionID:       "029a00da.pixocial.io",
+		LeaderElectionID:       "c82fe44c.pixocial.io",
 		// LeaderElectionReleaseOnCancel defines if the leader should step down voluntarily
 		// when the Manager ends. This requires the binary to immediately end when the
 		// Manager is stopped, otherwise, this setting is unsafe. Setting this significantly
@@ -144,11 +144,11 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err = (&controller.ServiceMonitorReconciler{
+	if err = (&controller.TestMonitorReconciler{
 		Client: mgr.GetClient(),
 		Scheme: mgr.GetScheme(),
 	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "ServiceMonitor")
+		setupLog.Error(err, "unable to create controller", "controller", "TestMonitor")
 		os.Exit(1)
 	}
 	// +kubebuilder:scaffold:builder

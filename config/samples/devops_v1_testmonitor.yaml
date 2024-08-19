@@ -1,0 +1,9 @@
+apiVersion: devops.pixocial.io/v1
+kind: TestMonitor
+metadata:
+  labels:
+    app.kubernetes.io/name: testcrd
+    app.kubernetes.io/managed-by: kustomize
+  name: testmonitor-sample
+spec:
+  # TODO(user): Add fields here

@@ -1,9 +1,0 @@
-apiVersion: servicemonitor.pixocial.io/v1
-kind: ServiceMonitor
-metadata:
-  labels:
-    app.kubernetes.io/name: servicemonitor
-    app.kubernetes.io/managed-by: kustomize
-  name: servicemonitor-sample
-spec:
-  # TODO(user): Add fields here
