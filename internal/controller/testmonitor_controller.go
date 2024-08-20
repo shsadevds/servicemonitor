@@ -49,7 +49,14 @@ func (r *TestMonitorReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 	logger := log.FromContext(ctx)
 	logger.Info("init crdTest")
 
+	// 定义一个 ServiceList 对象
 	serviceList := corev1.ServiceList{}
+
+	// 使用 r.List 方法获取所有的服务
+	if err := r.List(ctx, &serviceList); err != nil {
+		logger.Error(err, "failed to list services")
+		return ctrl.Result{}, err
+	}
 	for _,svc := range serviceList.Items{
 		if svc.Namespace == "observable" || svc.Namespace == "kube-system" {
 			continue
