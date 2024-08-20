@@ -55,7 +55,7 @@ func (r *TestMonitorReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 		if svc.Namespace == "observable" || svc.Namespace == "kube-system" {
 			continue
 		}
-		fmt.Println(svc.Spec.ClusterIP)
+		logger.Info(svc.Spec.ClusterIP)
 	}
 
 	// TODO(user): your logic here
