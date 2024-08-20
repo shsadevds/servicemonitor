@@ -47,7 +47,7 @@ type TestMonitorReconciler struct {
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.18.4/pkg/reconcile
 func (r *TestMonitorReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	logger := log.FromContext(ctx)
-	logger.Info("init crdTest")
+	logger.Info("servity","info")
 
 	// 定义一个 ServiceList 对象
 	serviceList := corev1.ServiceList{}
@@ -60,8 +60,12 @@ func (r *TestMonitorReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 	for _,svc := range serviceList.Items{
 		if svc.Namespace == "observable" || svc.Namespace == "kube-system" {
 			continue
+		}else {
+			logger.Info(svc.Spec.ClusterIP,"IP")
+			logger.Info(svc.Name,"Name")
 		}
-		logger.Info(svc.Spec.ClusterIP)
+
+
 	}
 
 	// TODO(user): your logic here
